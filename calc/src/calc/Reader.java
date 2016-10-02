@@ -11,6 +11,11 @@ public class Reader extends JFrame{
 	eHandler Handler = new eHandler();
 	public Reader(String s){
 		super(s);
+		setSize(200, 200);
+		setVisible(true);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setResizable(false);
+		setLocationRelativeTo(null);
 		setLayout(new FlowLayout());
 		t1 = new JTextField(16);
 		b1 = new JButton("1");
