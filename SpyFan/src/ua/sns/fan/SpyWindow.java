@@ -123,57 +123,47 @@ public class SpyWindow extends JFrame {
 	                }
 	                //  ѕервое заполнение
             		if (spyfan.sellers.isEmpty()) {
-            			for (int i = 0; i < spyfan.sellersnew.size(); i++) {
-        	                Seller seller = new Seller();
-        	                seller.setServer(spyfan.sellersnew.get(i).getServer());
-        	                seller.setSide(spyfan.sellersnew.get(i).getSide());
-        	                seller.setName(spyfan.sellersnew.get(i).getName());
-        	                seller.setSum(spyfan.sellersnew.get(i).getSum());
-        	                seller.setPrice(spyfan.sellersnew.get(i).getPrice());
-        	                seller.setSell("0");
-        	                spyfan.sellers.add(seller);
-            			}
-            			System.out.println("ѕервое заполнение");
-    	                reader.close();
-    	                System.out.println(formatForDateNow.format(new Date()));
-	                	table.updateUI();
-            			return;
 					}
-            		
-	                //  —читаем проданное
-        			System.out.println("11111" + formatForDateNow.format(new Date()));
-            		int a,b,c = 0;
-            		for (int i = 0; i < spyfan.sellersnew.size(); i++) {
-            			ss1 = spyfan.sellersnew.get(i).getServer() + spyfan.sellersnew.get(i).getSide() + spyfan.sellersnew.get(i).getName();
-						for (int j = 0; j < spyfan.sellers.size(); j++) {
-	            			ss2 = spyfan.sellers.get(j).getServer() + spyfan.sellers.get(j).getSide() + spyfan.sellers.get(j).getName();
-	            			System.out.println("ss2 " + ss2);
-							if (ss1.equals(ss2)) {
-								System.out.println("a" +spyfan.sellersnew.get(i).getSum());
-								System.out.println("b" +spyfan.sellers.get(j).getSum());
-								System.out.println("c" +spyfan.sellersnew.get(i).getSell());
+            		if (!spyfan.sellers.isEmpty()) {
+		                //  —читаем проданное
+	        			System.out.println("11111" + formatForDateNow.format(new Date()));
+	            		int a,b,c = 0;
+	            		for (int i = 0; i < spyfan.sellersnew.size(); i++) {
+	            			ss1 = spyfan.sellersnew.get(i).getServer() + spyfan.sellersnew.get(i).getSide() + spyfan.sellersnew.get(i).getName();
+							for (int j = 0; j < spyfan.sellers.size(); j++) {
+		            			ss2 = spyfan.sellers.get(j).getServer() + spyfan.sellers.get(j).getSide() + spyfan.sellers.get(j).getName();
+								if (ss1.equals(ss2)) {
+									a = Integer.parseInt(spyfan.sellers.get(j).getSell().replace(" ", ""));
+									b = Integer.parseInt(spyfan.sellers.get(j).getSum().replace(" ", ""));
+									c = Integer.parseInt(spyfan.sellersnew.get(i).getSum().replace(" ", ""));
 								
-								a = Integer.parseInt(spyfan.sellers.get(j).getSell().replace(" ", ""));
-								b = Integer.parseInt(spyfan.sellers.get(j).getSum().replace(" ", ""));
-								c = Integer.parseInt(spyfan.sellersnew.get(i).getSum().replace(" ", ""));
-							
-								if (c < b) {
-									spyfan.sellers.get(j).setSell(Integer.toString( a + b - c ));
-									spyfan.sellers.get(j).setSum(spyfan.sellersnew.get(i).getSum());
-									System.out.println("New trade: " + spyfan.sellersnew.get(i).getName() + " in " + formatForDateNow.format(new Date()));
-									textArea.setAutoscrolls(true);
-									textArea.append("New trade: " + spyfan.sellersnew.get(i).getName() + " in " + formatForDateNow.format(new Date()) + "\n");
-								}
-								else {
-									spyfan.sellers.get(j).setSum(spyfan.sellersnew.get(i).getSum());
-									spyfan.sellers.get(j).setPrice(spyfan.sellersnew.get(i).getPrice());
+									if (c < b) {
+										spyfan.sellersnew.get(i).setSell(Integer.toString( a + b - c ));
+										System.out.println("New trade: " + spyfan.sellersnew.get(i).getName() + " in " + formatForDateNow.format(new Date()));
+										textArea.setAutoscrolls(true);
+										textArea.append("New trade: " + spyfan.sellersnew.get(i).getName() + " Sum: " + spyfan.sellersnew.get(i).getSell() + " in " + formatForDateNow.format(new Date()) + "\n");
+									}
+									else {
+										spyfan.sellersnew.get(i).setSell(spyfan.sellers.get(j).getSell());
+									}
 								}
 							}
-						}
+	            		}
 					}
-				
-					
-           		
+	                // очищаю таблицу, что-б не накапливалась
+	                if (!spyfan.sellers.isEmpty()) {
+	                	spyfan.sellers.clear();
+	                }
+        			for (int i = 0; i < spyfan.sellersnew.size(); i++) {
+    	                Seller seller = new Seller();
+    	                seller.setServer(spyfan.sellersnew.get(i).getServer());
+    	                seller.setSide(spyfan.sellersnew.get(i).getSide());
+    	                seller.setName(spyfan.sellersnew.get(i).getName());
+    	                seller.setSum(spyfan.sellersnew.get(i).getSum());
+    	                seller.setPrice(spyfan.sellersnew.get(i).getPrice());
+    	                seller.setSell(spyfan.sellersnew.get(i).getSell());
+    	                spyfan.sellers.add(seller);
+        			}
 	                reader.close();
 	                table.updateUI();
 					lblLabel2.setText(formatForDateNow.format(new Date()));
