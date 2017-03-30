@@ -8,6 +8,7 @@ import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.io.FileNotFoundException;
 
 import javax.swing.JFrame;
 import javax.swing.JTable;
@@ -22,6 +23,9 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeEvent;
+import javax.swing.JComboBox;
+import java.awt.event.ItemListener;
+import java.awt.event.ItemEvent;
 
 public class SpyWindow extends JFrame {
 	private JTable table;
@@ -38,6 +42,7 @@ public class SpyWindow extends JFrame {
 	private JTextField tDelay;
 	private JButton btnSetdelay;
 	private JScrollPane scrollPane_1;
+
 
 
 	public SpyWindow(String s){
@@ -75,6 +80,7 @@ public class SpyWindow extends JFrame {
 		
 		lblLabel2 = new JLabel("");
 		lblLabel2.setBounds(685, 481, 78, 14);
+		getContentPane().add(lblLabel2);
 		
 		JButton btnStart = new JButton("Start");
 		btnStart.addActionListener(new ActionListener() {
@@ -129,6 +135,9 @@ public class SpyWindow extends JFrame {
 		
 		textArea = new JTextArea();
 		scrollPane_1.setViewportView(textArea);
+
+		
+
 	}
 
 	
@@ -144,7 +153,9 @@ public class SpyWindow extends JFrame {
 
 	        try {
 	            URL url = new URL("http://funpay.ru/chips/43/");
-
+//	        	sitename = "http://funpay.ru/chips/43/";
+//	        	System.out.println(sitename.length());
+//	        	URL url = new URL(sitename);
 	            try {
 	                LineNumberReader reader = new LineNumberReader(new InputStreamReader(url.openStream(),"UTF-8"));
 	                String string = reader.readLine();
