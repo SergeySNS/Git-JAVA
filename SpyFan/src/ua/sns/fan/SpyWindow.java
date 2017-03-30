@@ -14,6 +14,7 @@ import javax.swing.JTable;
 import javax.swing.JScrollPane;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import javax.swing.JList;
 import javax.swing.JLabel;
@@ -121,10 +122,8 @@ public class SpyWindow extends JFrame {
                     	}
 	                    string = reader.readLine();
 	                }
-	                //  Первое заполнение
-            		if (spyfan.sellers.isEmpty()) {
-					}
-            		if (!spyfan.sellers.isEmpty()) {
+
+	                if (!spyfan.sellers.isEmpty()) {
 		                //  Считаем проданное
 	        			System.out.println("11111" + formatForDateNow.format(new Date()));
 	            		int a,b,c = 0;
@@ -136,12 +135,13 @@ public class SpyWindow extends JFrame {
 									a = Integer.parseInt(spyfan.sellers.get(j).getSell().replace(" ", ""));
 									b = Integer.parseInt(spyfan.sellers.get(j).getSum().replace(" ", ""));
 									c = Integer.parseInt(spyfan.sellersnew.get(i).getSum().replace(" ", ""));
-								
 									if (c < b) {
 										spyfan.sellersnew.get(i).setSell(Integer.toString( a + b - c ));
 										System.out.println("New trade: " + spyfan.sellersnew.get(i).getName() + " in " + formatForDateNow.format(new Date()));
 										textArea.setAutoscrolls(true);
-										textArea.append("New trade: " + spyfan.sellersnew.get(i).getName() + " Sum: " + spyfan.sellersnew.get(i).getSell() + " in " + formatForDateNow.format(new Date()) + "\n");
+										textArea.append("New trade: " + spyfan.sellersnew.get(i).getName() + " Sum: " + spyfan.sellersnew.get(i).getPrice() + "Price: " + " in " + formatForDateNow.format(new Date()) + "\n");
+										java.awt.Toolkit tk = Toolkit.getDefaultToolkit();
+										tk.beep();
 									}
 									else {
 										spyfan.sellersnew.get(i).setSell(spyfan.sellers.get(j).getSell());

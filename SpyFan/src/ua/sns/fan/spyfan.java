@@ -8,7 +8,6 @@ import javax.swing.JFrame;
 public class spyfan {
 	public static ArrayList<Seller> sellers = new ArrayList<Seller>();
 	public static ArrayList<Seller> sellersnew = new ArrayList<Seller>();
-	public static ArrayList<Seller> sellerst = new ArrayList<Seller>();
 	private static SpyWindow w;
 	
 	public static void main(String[] args) {
