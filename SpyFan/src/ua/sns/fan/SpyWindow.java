@@ -189,7 +189,7 @@ public class SpyWindow extends JFrame {
 										spyfan.sellersnew.get(i).setSell(Integer.toString( a + b - c ));
 										System.out.println("New trade: " + spyfan.sellersnew.get(i).getName() + " in " + formatForDateNow.format(new Date()));
 										textArea.setAutoscrolls(true);
-										textArea.append("New trade: " + spyfan.sellersnew.get(i).getName() + " Sum: " + spyfan.sellersnew.get(i).getPrice() + "Price: " + " in " + formatForDateNow.format(new Date()) + "\n");
+										textArea.append("New trade: " + spyfan.sellersnew.get(i).getName() + " Sum: " + spyfan.sellersnew.get(i).getSell() + "Price: " + spyfan.sellersnew.get(i).getPrice() + " in " + formatForDateNow.format(new Date()) + "\n");
 										java.awt.Toolkit tk = Toolkit.getDefaultToolkit();
 										tk.beep();
 									}
