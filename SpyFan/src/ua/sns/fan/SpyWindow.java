@@ -100,8 +100,8 @@ public class SpyWindow extends JFrame {
 		btnStop.setBounds(685, 150, 89, 23);
 		getContentPane().add(btnStop);
 		
-		JLabel lblTimeDelay = new JLabel("Time delay:");
-		lblTimeDelay.setBounds(695, 183, 63, 14);
+		JLabel lblTimeDelay = new JLabel("Time delay:msec");
+		lblTimeDelay.setBounds(685, 184, 89, 14);
 		getContentPane().add(lblTimeDelay);
 		
 		JLabel lblDelayn = new JLabel("Delay:");
@@ -113,7 +113,7 @@ public class SpyWindow extends JFrame {
 		getContentPane().add(lblDelay);
 
 		tDelay = new JTextField();
-		tDelay.setBounds(688, 200, 86, 20);
+		tDelay.setBounds(685, 207, 89, 20);
 		getContentPane().add(tDelay);
 		tDelay.setColumns(10);
 		
@@ -124,7 +124,7 @@ public class SpyWindow extends JFrame {
 				lblDelay.setText(Integer.toString(spyfan.delay/1000)+" sec");
 			}
 		});
-		btnSetdelay.setBounds(685, 222, 89, 23);
+		btnSetdelay.setBounds(685, 226, 89, 23);
 		getContentPane().add(btnSetdelay);
 	}
 
