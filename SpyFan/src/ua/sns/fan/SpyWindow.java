@@ -19,6 +19,9 @@ import java.awt.event.ActionEvent;
 import javax.swing.JList;
 import javax.swing.JLabel;
 import javax.swing.JTextArea;
+import javax.swing.JTextField;
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeEvent;
 
 public class SpyWindow extends JFrame {
 	private JTable table;
@@ -32,6 +35,8 @@ public class SpyWindow extends JFrame {
 	private String ss1;
 	private String ss2;
 	private JTextArea textArea;
+	private JTextField tDelay;
+	private JButton btnSetdelay;
 
 
 	public SpyWindow(String s){
@@ -75,7 +80,52 @@ public class SpyWindow extends JFrame {
 		textArea.setBounds(10, 450, 665, 101);
 		getContentPane().add(textArea);
 		
+		JButton btnStart = new JButton("Start");
+		btnStart.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				spyfan.work = true;
+				textArea.append("Start..." + "\n");
+			}
+		});
+		btnStart.setBounds(685, 120, 89, 23);
+		getContentPane().add(btnStart);
+		
+		JButton btnStop = new JButton("Stop");
+		btnStop.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				spyfan.work = false;
+				textArea.append("Stop." + "\n");
+			}
+		});
+		btnStop.setBounds(685, 150, 89, 23);
+		getContentPane().add(btnStop);
+		
+		JLabel lblTimeDelay = new JLabel("Time delay:");
+		lblTimeDelay.setBounds(695, 183, 63, 14);
+		getContentPane().add(lblTimeDelay);
+		
+		JLabel lblDelayn = new JLabel("Delay:");
+		lblDelayn.setBounds(695, 272, 46, 14);
+		getContentPane().add(lblDelayn);
+		
+		JLabel lblDelay = new JLabel(Integer.toString(spyfan.delay/1000)+" sec");
+		lblDelay.setBounds(695, 284, 56, 14);
+		getContentPane().add(lblDelay);
 
+		tDelay = new JTextField();
+		tDelay.setBounds(688, 200, 86, 20);
+		getContentPane().add(tDelay);
+		tDelay.setColumns(10);
+		
+		btnSetdelay = new JButton("SetDelay");
+		btnSetdelay.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				spyfan.delay = Integer.parseInt(tDelay.getText());
+				lblDelay.setText(Integer.toString(spyfan.delay/1000)+" sec");
+			}
+		});
+		btnSetdelay.setBounds(685, 222, 89, 23);
+		getContentPane().add(btnSetdelay);
 	}
 
 	
@@ -168,11 +218,29 @@ public class SpyWindow extends JFrame {
 	                table.updateUI();
 					lblLabel2.setText(formatForDateNow.format(new Date()));
 	            } catch (IOException e) {
-	                e.printStackTrace();
+					System.out.println("Не смог заполнить таблицу");
+					textArea.append("Не смог заполнить таблицу" + "\n");
+					try {
+						Thread.currentThread();
+						Thread.sleep(2000) ;
+					} catch (InterruptedException e1) {
+						e1.printStackTrace();
+					}
+//	                e.printStackTrace();
+					return;
 	            }
 
 	        } catch (MalformedURLException ex) {
-	            ex.printStackTrace();
+				System.out.println("Не смог прочитать сайт");
+				textArea.append("Не смог прочитать сайт" + "\n");
+				try {
+					Thread.currentThread();
+					Thread.sleep(10000) ;
+				} catch (InterruptedException e1) {
+					e1.printStackTrace();
+				}
+//	            ex.printStackTrace();
+				return;
 	        }
     		
 	    }

@@ -9,6 +9,8 @@ public class spyfan {
 	public static ArrayList<Seller> sellers = new ArrayList<Seller>();
 	public static ArrayList<Seller> sellersnew = new ArrayList<Seller>();
 	private static SpyWindow w;
+	public static int delay = 20000;
+	public static boolean work = true;
 	
 	public static void main(String[] args) {
 		w = new SpyWindow("Spy FanPay");
@@ -16,7 +18,18 @@ public class spyfan {
 		w.setSize(800, 600);
 		w.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		w.setLocationRelativeTo(null);
-		w.IfHtml();
+		while (true) {
+			if (work){
+				w.IfHtml();
+			}
+				try {
+					Thread.currentThread();
+					Thread.sleep(delay) ;
+				} catch (InterruptedException e1) {
+					e1.printStackTrace();
+				}
+			
+		}
 //        spyfan.sellers.get(0).setSum("221");
 //        spyfan.sellersnew.get(0).setSum("223");
 //		System.out.println("11111 " + spyfan.sellers.get(0).getSum());
