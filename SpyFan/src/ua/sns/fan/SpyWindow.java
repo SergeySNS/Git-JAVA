@@ -37,6 +37,7 @@ public class SpyWindow extends JFrame {
 	private JTextArea textArea;
 	private JTextField tDelay;
 	private JButton btnSetdelay;
+	private JScrollPane scrollPane_1;
 
 
 	public SpyWindow(String s){
@@ -74,11 +75,6 @@ public class SpyWindow extends JFrame {
 		
 		lblLabel2 = new JLabel("");
 		lblLabel2.setBounds(685, 481, 78, 14);
-		getContentPane().add(lblLabel2);
-		
-		textArea = new JTextArea();
-		textArea.setBounds(10, 450, 665, 101);
-		getContentPane().add(textArea);
 		
 		JButton btnStart = new JButton("Start");
 		btnStart.addActionListener(new ActionListener() {
@@ -124,8 +120,15 @@ public class SpyWindow extends JFrame {
 				lblDelay.setText(Integer.toString(spyfan.delay/1000)+" sec");
 			}
 		});
-		btnSetdelay.setBounds(685, 226, 89, 23);
+		btnSetdelay.setBounds(685, 238, 89, 23);
 		getContentPane().add(btnSetdelay);
+		
+		scrollPane_1 = new JScrollPane();
+		scrollPane_1.setBounds(10, 450, 665, 101);
+		getContentPane().add(scrollPane_1);
+		
+		textArea = new JTextArea();
+		scrollPane_1.setViewportView(textArea);
 	}
 
 	
