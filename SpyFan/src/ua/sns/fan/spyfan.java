@@ -11,8 +11,13 @@ public class spyfan {
 	private static SpyWindow w;
 	public static int delay = 20000;
 	public static boolean work = true;
+	public static String[] blackprice = {"Zakkk", "Ivanko"};
+	public static String myprice = "SergeySel";
 	
 	public static void main(String[] args) {
+		
+
+		
 		w = new SpyWindow("Spy FanPay");
 		w.setVisible(true);
 		w.setSize(800, 600);

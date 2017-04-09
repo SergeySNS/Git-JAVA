@@ -9,6 +9,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
 
 import javax.swing.JFrame;
 import javax.swing.JTable;
@@ -42,6 +43,7 @@ public class SpyWindow extends JFrame {
 	private JTextField tDelay;
 	private JButton btnSetdelay;
 	private JScrollPane scrollPane_1;
+	private String text;
 
 
 
@@ -149,23 +151,22 @@ public class SpyWindow extends JFrame {
 	public void IfHtml() {
         // ("E yyyy.MM.dd 'и врем€' hh:mm:ss a zzz")
         SimpleDateFormat formatForDateNow = new SimpleDateFormat("HH:mm:ss");
-	
-
+ 
 	        try {
-	            URL url = new URL("http://funpay.ru/chips/43/");
+	            URL url = new URL("https://funpay.ru/chips/43/");
 //	        	sitename = "http://funpay.ru/chips/43/";
 //	        	System.out.println(sitename.length());
 //	        	URL url = new URL(sitename);
 	            try {
 	                LineNumberReader reader = new LineNumberReader(new InputStreamReader(url.openStream(),"UTF-8"));
 	                String string = reader.readLine();
-	                
 	                // очищаю таблицу, что-б не накапливалась
 	                if (!spyfan.sellersnew.isEmpty()) {
 	                	spyfan.sellersnew.clear();
 	                }
 	                while (string != null) {
                 		// заполн€ю Seller
+
                     	if (string.contains("<td>")) {
                     		Seller sellernew = new Seller();
                     		sellernew.setServer(string.substring(string.indexOf("<td>")+4, string.indexOf("</td>")));
@@ -186,7 +187,6 @@ public class SpyWindow extends JFrame {
                     	}
 	                    string = reader.readLine();
 	                }
-
 	                if (!spyfan.sellers.isEmpty()) {
 		                //  —читаем проданное
 	        			System.out.println("11111" + formatForDateNow.format(new Date()));
@@ -203,7 +203,11 @@ public class SpyWindow extends JFrame {
 										spyfan.sellersnew.get(i).setSell(Integer.toString( a + b - c ));
 										System.out.println("New trade: " + spyfan.sellersnew.get(i).getName() + " in " + formatForDateNow.format(new Date()));
 										textArea.setAutoscrolls(true);
-										textArea.append("New trade: " + spyfan.sellersnew.get(i).getName() + " Sum: " + spyfan.sellersnew.get(i).getSell() + "Price: " + spyfan.sellersnew.get(i).getPrice() + " in " + formatForDateNow.format(new Date()) + "\n");
+										text = "New: " + spyfan.sellersnew.get(i).getName() + " " + spyfan.sellersnew.get(i).getServer() + " " + spyfan.sellersnew.get(i).getSide() + " Sum: " + Integer.toString( b - c ) + "Price: " + spyfan.sellersnew.get(i).getPrice() + " in " + formatForDateNow.format(new Date()) + "\n";
+										textArea.append(text);
+										FileWriter writer = new FileWriter("Sells.txt", true);
+//										writer.write("\n" + text);
+										writer.close();
 										java.awt.Toolkit tk = Toolkit.getDefaultToolkit();
 										tk.beep();
 									}
